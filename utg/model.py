@@ -35,7 +35,7 @@ class Model():
 
     def load_config(self):
         print("Loading configuration")
-        fo = open(CONFIG_FILE_NAME,"r")
+        fo = open(CONFIG_FILE_NAME, "r")
         self.rooms = json.load(fo)
         fo.close()
 
@@ -45,6 +45,7 @@ class Model():
             fo.write('')
             for room in self.rooms:
                 json.dump(room, fo, indent=4)"""
+        print("Saving configuration")
         fo = open(CONFIG_FILE_NAME, "w")
         fo.truncate(0)
         json.dump(self.rooms, fo, indent=4)
@@ -54,8 +55,11 @@ class Model():
         print("Creating room objects")
         for nr in range(MAX_NO_OF_ROOMS):
             new_room: dict = {
-                "nr": nr+1, "target_temp": 22.5, "cooling":0}
+                "nr": nr+1, "target_temp": 22.5, "cooling": 0}
             self.rooms["Rooms"].append(new_room)
 
     def get_target_temp(self, room_nr: int) -> float:
-        return float(self.rooms["Rooms"][room_nr-1]["target_temp"])
+        return self.rooms["Rooms"][room_nr-1]["target_temp"]
+
+    def set_target_temp(self,room_nr:int,val:float):
+        self.rooms["Rooms"][room_nr]["target_temp"] = val

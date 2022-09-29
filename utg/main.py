@@ -13,7 +13,7 @@ class App(tk.Tk):
         view = View(self)
         view.pack(fill="both")
 
-        controller = Controller()
+        controller = Controller(model=model,view=view)
 
         view.set_controller(controller=controller)
 
