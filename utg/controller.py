@@ -17,3 +17,7 @@ class Controller():
     
     def set_target_temp(self,number:int,val:float):
         self.model.set_target_temp(room_nr=number,val=float(val))
+
+    def load_view_config(self):
+        roomlist= self.model.rooms.get("Rooms")
+        self.view.load_config(roomlist)    

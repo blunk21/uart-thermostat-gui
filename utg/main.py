@@ -9,6 +9,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("UART Thermostat")
+        self.attributes("-zoomed",True)
         model = Model()
         view = View(self)
         view.pack(fill="both")
@@ -17,10 +18,12 @@ class App(tk.Tk):
 
         view.set_controller(controller=controller)
 
+        controller.load_view_config()
 
 
 
 
 if __name__ == "__main__":
     app = App()
+
     app.mainloop()
