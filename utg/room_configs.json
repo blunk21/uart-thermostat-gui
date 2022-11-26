@@ -2,23 +2,23 @@
     "Rooms": [
         {
             "nr": 1,
-            "target_temp": 22.5,
+            "target_temp": 25.0,
             "cooling": 0
         },
         {
             "nr": 2,
-            "target_temp": 22.5,
+            "target_temp": 28.0,
             "cooling": 0
         },
         {
             "nr": 3,
-            "target_temp": 22.5,
-            "cooling": 0
+            "target_temp": 19.5,
+            "cooling": 1
         },
         {
             "nr": 4,
-            "target_temp": 22.5,
-            "cooling": 0
+            "target_temp": 18.5,
+            "cooling": 1
         }
     ]
 }

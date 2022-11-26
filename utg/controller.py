@@ -1,4 +1,5 @@
 import serial
+import time
 
 
 class Controller():
@@ -6,6 +7,15 @@ class Controller():
         self. model = model
         self.view = view
         self.ser = serial.Serial(port="/dev/ttyUSB1", baudrate=115200)
+
+    def send_config(self,roomlist: list):
+        for i in range(4):
+            cooling = roomlist[i]["cooling"]
+            temp = roomlist[i]["target_temp"]
+            self.send_temp_command(i,temp)
+            time.sleep(.5)
+            self.send_cooling_command(i,cooling)
+            time.sleep(.5)
 
     def cooling_radio_change(self, number: int, val: int):
         try:
@@ -27,6 +37,7 @@ class Controller():
     def load_view_config(self):
         roomlist = self.model.rooms.get("Rooms")
         self.view.load_config(roomlist)
+        self.send_config(roomlist)
 
     def send_temp_command(self, room_nr, value):
         commandstring: str = f":st{room_nr+1}{int(value*10)}!"
@@ -37,3 +48,5 @@ class Controller():
         commandstring: str = f":sc{room_nr+1}00{value}!"
         self.ser.write(bytes(commandstring, "ascii"))
         print("sent:" + commandstring)
+
+
